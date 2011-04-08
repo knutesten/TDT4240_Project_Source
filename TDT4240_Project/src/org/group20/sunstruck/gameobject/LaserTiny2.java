@@ -15,7 +15,7 @@ public class LaserTiny2 extends GameObject {
 		isProjectile = true;
 		speed = 6;
 		density = 0.01f;
-		impactDamage = 2;
+		impactDamage = 5;
 		type = TYPES.BULLET;
 		score = 0;
 

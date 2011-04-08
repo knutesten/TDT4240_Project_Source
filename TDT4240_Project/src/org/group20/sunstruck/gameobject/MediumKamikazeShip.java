@@ -7,18 +7,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MediumKamikazeShip extends GameObject {
 	public static TextureRegion shipTexture = Game.textureAtlas
-			.findRegion("shipSmall2");
+			.findRegion("shipHuge3");
 
 	public MediumKamikazeShip() {
-		super(shipTexture, 0.7f);
-		weaponType = new LaserTiny1();
+		super(shipTexture, 1f);
+		speed = 7;
 		reloadTime = 300;
-		BURST_COUNT = 2;
-		behavior = BEHAVIOR.KAMIKAZE_VEL;
-		impactDamage = 12;
-		hull = 5;
+		BURST_COUNT = 3;
+		PAUSE_COUNT = 6;
+		behavior = BEHAVIOR.SIN_VEL;
+		impactDamage = 30;
+		hull = 30;
 		currentHull = hull;
 		shield = 0;
+		weaponType = new LaserTiny1();
 		currentShield = shield;
 	}
 

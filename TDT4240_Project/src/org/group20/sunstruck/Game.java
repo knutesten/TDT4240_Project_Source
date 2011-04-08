@@ -28,10 +28,11 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Game implements GameInterface, ContactListener {
-	public static final FileHandle PLAYER_FILE = Gdx.files.external("player.dat");
+	public static final FileHandle PLAYER_FILE = Gdx.files
+			.external("player.dat");
 	public static boolean DEBUG = false;
-	public static TextureAtlas textureAtlas = new TextureAtlas(
-			Gdx.files.internal("data/pack"));
+	public static TextureAtlas textureAtlas = new TextureAtlas(Gdx.files
+			.internal("data/pack"));
 	private float updateRate = 1.0f; // physics update rate
 	private float totalTime;
 	private Vector2 initGravity = new Vector2(0, 0);
@@ -50,8 +51,8 @@ public class Game implements GameInterface, ContactListener {
 	private boolean bossAlive = false;
 	private float bossTimer = 0;
 	private int bossCount = 1;
-	private int bossInterval = 50000; // playerScore >
-										// bossInterval*bossCount =>
+	private int bossInterval = 200; // playerScore >
+	// bossInterval*bossCount =>
 	// spawn boss
 	private float enemySpawnTime = 0;
 	private float enemySpawnInterval = 2;
@@ -62,11 +63,11 @@ public class Game implements GameInterface, ContactListener {
 	}
 
 	public void initializePlayer() {
-//		Not tested.
-//		player = openPlayerObject();
-//			if(player == null)
-				player = goFactory.createPlayer(new Vector2(0, 0), 0);
-		
+		// Not tested.
+		// player = openPlayerObject();
+		// if(player == null)
+		player = goFactory.createPlayer(new Vector2(0, 0), 0);
+
 	}
 
 	private Game(DIFFICULTIES d) {
@@ -95,13 +96,13 @@ public class Game implements GameInterface, ContactListener {
 
 	@Override
 	public void update() {
-		System.out.println("I update i game: "+Menu.isActive);
+		System.out.println("I update i game: " + Menu.isActive);
 		if (Shop.isActive || Menu.isActive) {
 			System.out.println("hest");
 			input.update();
 			return;
 		}
-		if(doReset){
+		if (doReset) {
 			doReset = false;
 			doReset();
 		}
@@ -177,6 +178,7 @@ public class Game implements GameInterface, ContactListener {
 				goFactory.createBoss(new Vector2(12, 0), (float) Math.PI);
 				bossAlive = true;
 				bossTimer = 0;
+				bossInterval*=2;
 			}
 		}
 	}
@@ -249,7 +251,7 @@ public class Game implements GameInterface, ContactListener {
 
 		// --- let's check if enemies are shooting at each other! ---
 		if (goB.isEnemy() && goA.isEnemy()) { // enemy objects hitting each
-												// other
+			// other
 			if (goB.isProjectile()) {
 				goB.contact(contact, Float.MAX_VALUE);
 			}
@@ -292,31 +294,31 @@ public class Game implements GameInterface, ContactListener {
 			}
 		}
 	}
-	
-	private Player openPlayerObject(){
+
+	private Player openPlayerObject() {
 		Player player = null;
-		try{
-			InputStream  is = PLAYER_FILE.read();
+		try {
+			InputStream is = PLAYER_FILE.read();
 			ObjectInputStream ois = new ObjectInputStream(is);
-			player = (Player)ois.readObject();
+			player = (Player) ois.readObject();
 			is.close();
 			ois.close();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return player;
 	}
-	
-	private void savePlayerObject(Player player){
-		try{
+
+	private void savePlayerObject(Player player) {
+		try {
 			OutputStream os = PLAYER_FILE.write(true);
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 			oos.writeObject(player);
 			os.close();
 			oos.close();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -446,26 +448,32 @@ public class Game implements GameInterface, ContactListener {
 	public int randomNumber(int min, int max) {
 		return min + (int) Math.round((Math.random() * (max - min)));
 	}
-	public void reset(){
+
+	public void reset() {
 		doReset = true;
 	}
-	
+
 	private void doReset() {
 		destroyedBodiesList.clear();
 		Iterator<Body> it = world.getBodies();
 		Body body;
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			body = it.next();
-			if(body.getType() != BodyType.StaticBody)
+			if (body.getType() != BodyType.StaticBody)
 				destroyedBodiesList.add(body);
 		}
-		
-		for(int i = 0; i < destroyedBodiesList.size();i++){
+
+		for (int i = 0; i < destroyedBodiesList.size(); i++) {
 			body = destroyedBodiesList.get(i);
 			world.destroyBody(body);
 		}
-		destroyedBodiesList.clear();
 		initializePlayer();
-		
+		destroyedBodiesList.clear();
+		bossMode = false;
+		bossAlive = false;
+		bossTimer = 0;
+		bossCount = 1;
+		bossInterval = 200;
+
 	}
 }

@@ -10,7 +10,7 @@ public class SmallLaserShip extends GameObject {
 			.findRegion("shipSmall1");
 
 	public SmallLaserShip() {
-		super(shipTexture, 1f);
+		super(shipTexture, 1.2f);
 		behavior = BEHAVIOR.LINE;
 		hull = 5;
 		currentHull = hull;
@@ -18,7 +18,7 @@ public class SmallLaserShip extends GameObject {
 		currentShield = shield;
 		weaponType = new LaserTiny2();
 		speed = 1;
-		reloadTime = 1500;
+		reloadTime = 500;
 		PAUSE_COUNT = 0;
 	}
 

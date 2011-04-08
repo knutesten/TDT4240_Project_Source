@@ -23,7 +23,7 @@ public class Player extends GameObject implements Serializable {
 	private long startBomb = System.currentTimeMillis();
 	private long reloadTimeBomb = 60 * 1000;
 
-	private int weaponLevel = 1;
+	private int weaponLevel = 3;
 	private int hullLevel = 0;
 	private int shieldLevel = 0;
 	private int speedLevel = 0;

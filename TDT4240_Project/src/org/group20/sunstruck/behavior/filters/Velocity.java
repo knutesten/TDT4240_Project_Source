@@ -34,7 +34,7 @@ public class Velocity implements Filter {
 			float x = (float) Math.cos(body.getAngle());
 			float y = (float) Math.sin(body.getAngle());
 			velocity.set(x, y);
-			velocity.mul(go.getSpeed() * 2);
+			velocity.mul(go.getSpeed() /2);
 			body.setLinearVelocity(velocity);
 
 			if (body.getWorldPoint(new Vector2(0, 0)).x <= 0) {

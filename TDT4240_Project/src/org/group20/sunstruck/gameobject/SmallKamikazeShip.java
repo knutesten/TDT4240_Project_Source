@@ -18,7 +18,7 @@ public class SmallKamikazeShip extends GameObject {
 		weaponType = new LaserTiny2();
 		shield = 0;
 		currentShield = 0;
-		speed = 10;
+		speed = 15;
 	}
 
 	@Override

@@ -15,16 +15,16 @@ public class Boss extends GameObject {
 	long spawnTime = 350;
 	long start2 = System.currentTimeMillis();
 	int SPAWNBURST_COUNT = 3;
-	int SPAWNPAUSE_COUNT = 24;
+	int SPAWNPAUSE_COUNT = 0;
 	int spawnCount = 0;
 	public static TextureRegion shipTexture = Game.textureAtlas
 			.findRegion("shipColossal");
 
 	public Boss() {
 		super(shipTexture, 10);
-		shield = 100;
+		shield = 500;
 		currentShield = shield;
-		hull = 500;
+		hull = 750;
 		currentHull = hull;
 		type = TYPES.UNKNOWN;
 		weaponType = new LaserGreen1();
